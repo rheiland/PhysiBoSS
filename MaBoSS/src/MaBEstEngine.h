@@ -42,7 +42,8 @@
 #include "RandomGenerator.h"
 #include "RunConfig.h"
 
-class ArgWrapper;
+//class ArgWrapper;  //rwh
+struct ArgWrapper;
 
 class MaBEstEngine {
 

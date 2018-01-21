@@ -35,7 +35,7 @@ Step-by-step examples with the necessary files to run them are also proposed in 
 ## Usage
 ### Compiling PhysiBoSS
 PhysiBoSS should run and be easily installed on Linux and MacOS system. We also provide a [Docker image](https://github.com/gletort/PhysiBoSS/tree/master/Docker) of PhysiBoSS that can be used if it cannot be installed in your machine.
-It requires moderatly recent version of C++ (at least c++11) and OpenMP support.
+It requires moderately recent version of C++ (at least c++11) and OpenMP support.
 
 To install it on Linux system, from a Terminal:
 Clone the repository on your local machine, and go inside the main directory.
@@ -89,10 +89,10 @@ Example of a parameter file (with only few parameters shown):
 
 Please, refer to the [Wiki](https://github.com/gletort/PhysiBoSS/wiki) of this repository for a much more extended documentation, with step by step examples instructions. 
  
-PhysiCell is developped in [Paul Macklin's lab](http://mathcancer.org). 
-MaBoSS and PhysiBoSS are developped in the [Computational Systems Biology of Cancer group](http://sysbio.curie.fr) at Institut Curie (Paris, France). 
+PhysiCell is developed in [Paul Macklin's lab](http://mathcancer.org). 
+MaBoSS and PhysiBoSS are developed in the [Computational Systems Biology of Cancer group](http://sysbio.curie.fr) at Institut Curie (Paris, France). 
 
-We invit you to use PhysiBoSS for you research and give feedbacks to us. Any help in developping it further is more than welcome.
+We invite you to use PhysiBoSS for you research and give feedback to us. Any help in developing it further is more than welcome.
 Do not hesitate to contact us for any comments or difficulties in using PhysiBoSS: physiboss@gmail.com.
 
 

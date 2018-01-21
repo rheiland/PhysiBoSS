@@ -2,9 +2,17 @@ VERSION := 1.0.0
 
 PROGRAM_NAME := make_lib
 
-CC := g++ -Wfatal-errors 
+#CC := g++ -Wfatal-errors   #rwh
+CC := g++ 
+ifdef PHYSIBOSS_CPP 
+	CC := $(PHYSIBOSS_CPP)
+endif
 # CC := g++-mp-5 # typical macports compiler name
 # CC := g++-5 # typical homebrew compiler name 
+ARCH := native # best auto-tuning
+CFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
+
+COMPILE_COMMAND := $(CC) $(CFLAGS)
 
 #----------- Compilation mode (debug or release)
 MODE := R
@@ -20,9 +28,11 @@ BIN_DIR = bin
 CUR_DIR = $(shell pwd)
 
 ### MaBoSS directory
+#BOSS := MaBoSS
 BOSS := MaBoSS
 LIB := -L$(CUR_DIR)/$(BOSS)/lib -lMaBoSS
-INC := -I$(CUR_DIR)/$(BOSS)/include
+#INC := -I$(CUR_DIR)/$(BOSS)/include
+INC := -I$(CUR_DIR)/$(BOSS)/src
 
 #---------- Folders to look in
 vpath %.o     $(BUILD_DIR)
@@ -42,7 +52,7 @@ FlagsD := -O0 $(DEBUG) $(WARN)
 FlagsR := $(RELEASE) -march=native -O3 -s -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++0x
 FlagsP := $(PROFILE)
 
-COMPILE_COMMAND := $(CC) $(Flags$(MODE)) 
+COMPILE_COMMAND := $(COMPILE_COMMAND) $(Flags$(MODE)) 
 
 
 #------------ Objexts to compile

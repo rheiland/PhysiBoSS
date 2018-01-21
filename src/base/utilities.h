@@ -73,7 +73,11 @@
 
 #include <iostream>
 #include <ctime>
+#define _USE_MATH_DEFINES   // trying to do this for Windows/mingw-64 compile
 #include <cmath>
+#ifndef M_PI   // as a failsafe for Windows/mingw-64 compile
+    #define M_PI 3.14159265358979323846
+#endif
 #include <string>
 #include <vector>
 #include <random>

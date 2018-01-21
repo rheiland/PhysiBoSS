@@ -23,9 +23,22 @@ EXTRA_FLAGS = -std=c++0x
 endif
 
 CXXOPT = -O2
-CXXFLAGS = $(CXXOPT) -Wall -DMAXNODES=$(MAXNODES) $(EXTRA_FLAGS)
+#rwh CXXFLAGS = $(CXXOPT) -Wall -DMAXNODES=$(MAXNODES) $(EXTRA_FLAGS)
 
-MAKEDEPEND = gcc -M $(EXTRA_FLAGS)
+#--- rwh --------
+CC := g++ 
+ifdef PHYSIBOSS_CPP 
+	CC := $(PHYSIBOSS_CPP)
+endif
+# CC := g++-mp-5 # typical macports compiler name
+# CC := g++-5 # typical homebrew compiler name 
+ARCH := native # best auto-tuning
+CXXFLAGS := -march=$(ARCH) -O3 -fomit-frame-pointer -mfpmath=both -fopenmp -m64 -std=c++11
+
+COMPILE_COMMAND := $(CC) $(CFLAGS)
+#-----------
+
+#MAKEDEPEND = gcc -M $(EXTRA_FLAGS)
 
 FLEX = flex
 BISON = bison
@@ -36,17 +49,19 @@ CHECK_BISON = $(BISON) --version > /dev/null
 all: $(PROG)
 
 $(PROG): MaBoSS$(INFIX).o MaBEstEngine$(INFIX).o Cumulator$(INFIX).o ProbaDist$(INFIX).o BooleanNetwork$(INFIX).o BooleanGrammar$(INFIX).o RunConfigGrammar$(INFIX).o RunConfig$(INFIX).o LogicalExprGen$(INFIX).o
-	g++ -o $(PROG) $+ -lpthread
+#rwh	g++ -o $(PROG) $+ -lpthread
+	$(COMPILE_COMMAND) -o $(PROG) $+ -lpthread
 
 init:
-	@CXX=$(CXX) sh init-config.sh
+#	@CXX=$(CXX) sh init-config.sh   # change all CXX to COMPILE_COMMAND
+	@CXX=$(COMPILE_COMMAND) sh init-config.sh
 
 %$(INFIX).o: %.cc
 #	echo using explicit compilation rule $*.cc $*$(INFIX).o
-	$(CXX) $(CXXFLAGS) -c $*.cc -o $*$(INFIX).o
+	$(COMPILE_COMMAND) $(CXXFLAGS) -c $*.cc -o $*$(INFIX).o
 
 force-init:
-	@CXX=$(CXX) sh init-config.sh force
+	@CXX=$(COMPILE_COMMAND) sh init-config.sh force
 
 depend:
 	@$(MAKEDEPEND) -DMAXNODES=$(MAXNODES) *.cc > depend_tmp.mk

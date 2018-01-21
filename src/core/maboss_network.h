@@ -11,7 +11,8 @@
  * G. Letort, Institute Curie
  */
 
-#include "MaBEstEngine.h"
+//#include "MaBEstEngine.h"  //rwh
+#include "../../MaBoSS/src/MaBEstEngine.h"
 #include "../base/readXML.h"
 
 class MaBossNetwork
